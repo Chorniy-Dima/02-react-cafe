@@ -1,14 +1,14 @@
 import css from './App.module.css';
 import CafeInfo from '../CafeInfo/CafeInfo.tsx';
 import VoteOptions from '../VoteOptions/VoteOptions.tsx';
-import VoteStatus from '../VoteStats/VoteStats.tsx';
+import VoteStats from '../VoteStats/VoteStats.tsx';
 import Notification from '../Notification/Notification.tsx';
 import { useState } from 'react';
-import type { Vote } from '../../types/votes.ts';
+import type { Votes } from '../../types/votes.ts';
 import type { VoteType } from '../../types/votes.ts';
 
 export default function App() {
-  const [values, setValues] = useState<Vote>({ good: 0, neutral: 0, bad: 0 });
+  const [values, setValues] = useState<Votes>({ good: 0, neutral: 0, bad: 0 });
   
   const handleVote = (type: VoteType) => {
     setValues({
@@ -36,7 +36,7 @@ export default function App() {
       <div className={css.app}>
         <CafeInfo />
         <VoteOptions onVote={handleVote} onReset={resetVotes} canReset={totalVotes? true: false} />
-        {totalVotes > 0 && <VoteStatus votes={values} totalVotes={totalVotes} positiveRate={positiveRate} />}
+        {totalVotes > 0 && <VoteStats votes={values} totalVotes={totalVotes} positiveRate={positiveRate} />}
         {totalVotes == 0 && <Notification/>}
       </div>
     </>
